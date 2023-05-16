@@ -1,3 +1,9 @@
     Em um diagrama escrito de casos de uso não há necessidade de descrevermos
 todos os possiveis casos do sistema. Apenas os mais relevantes, os outros um
 breve resumo basta.
+    Na orientação a objeto, todo objeto tem um UID, o que significa que quando
+formos gerar um novo objeto ele devera ter um ID baseado em todos os objetos 
+já existentes. Exemplo, em uma aplicação que criamos um objeto "Pessoa1" e 
+precisamos de um outro para armazenar o livro que essa pessoa quer, ao inves
+de seu ID ser 1, tal qual o ID da pessoa, será 2, afinal o UID precisa ser um 
+ID unico.
