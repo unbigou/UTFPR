@@ -1,0 +1,3 @@
+    Em um diagrama escrito de casos de uso não há necessidade de descrevermos
+todos os possiveis casos do sistema. Apenas os mais relevantes, os outros um
+breve resumo basta.
