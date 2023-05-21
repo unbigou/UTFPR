@@ -1,0 +1,16 @@
+    Estrutura de árvore, é uma estrutura de dados que serve para organizar os dados de 
+forma hierarquica. Existem vários tipo de estruturas de árvore, cada um com seu ponto
+forte. 
+    Cada bolinha da árvore é chamada de Nó, os palzinhos que ligam (linkam) os Nós são
+as arestas. O grau de um nó é dado pelo número de filhos que ele tem. E o grau de um árvore
+é o número de folhas do nó de maior grau. Profundidade do nó é a profundidade do nó mais 
+profundo.
+
+    typedef struct no 
+    {
+        int chave;
+        struct no* no_raiz;
+        struct no* no_esquerdo;
+        struct no* no_direito;
+    } NO;
+

@@ -1,0 +1,16 @@
+    Em um diagrama de casos de uso, dois atores não interagem com a mesma ação. A não ser
+que se trate de uma interface o qual em certo ponto poderá ser divergem em diferentes 
+caminhos.
+    Uma forma de conseguir descrever melhor um diagrama de uso, é enchergar os requisitos
+de forma ignorante. Assim, iremos conseguir descrever da forma mais abrangente e detalhada
+o possivél.
+    Enquanto fazer um documento seja qual for, evitar descrever as coisas com atributos que
+sejam relativos, como; rapido, grande, pequeno e etc. Nesses casos sempre são necessários 
+medidas exatas.
+
+    Diagrama de Requisito de Sistema
+    Diagrama de Casos de Uso
+    Diagrama Textual de Casos de Uso 
+    Mapa Conceitual
+    Diagrama de Sequência do Sistema 
+     
