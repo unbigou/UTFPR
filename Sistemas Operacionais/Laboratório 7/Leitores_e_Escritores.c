@@ -1,3 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <semaphore.h>
+
+
 typedef int semaphore; /* use sua imaginacao */
 semaphore mutex = 1; /* controla o acesso a ‘rc’ */
 semaphore db = 1; /* controla o acesso a base de dados */
