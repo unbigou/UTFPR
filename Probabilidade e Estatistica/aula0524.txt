@@ -1,0 +1,57 @@
+Questão 3: Uma v.a.X tem distribuição normal, com média 100 e desvio padrão 10.
+
+    (A) Qual a P(90 <X <110)?
+    (B) Se X- for a média de uma amostra de 16 elementos retirados dessa população 
+    calcule P(90 <X <110).
+    (C) Represente, num único gráfico, as distribuições de X e X-.
+
+===============================================================================================
+
+(A) A distribuição normal padrão possui média 0 e desvio padrão 1. Podemos padronizar
+a variável X para uma distribuição normal padrão Z usando a fórmula Z = (X - μ) / σ, 
+onde μ é a média e σ é o desvio padrão.
+
+Nesse caso, temos:
+Z1 = (90 - 100) / 10 = -1
+Z2 = (110 - 100) / 10 = 1
+
+Consultando a tabela Z, encontramos as probabilidades correspondentes aos valores padronizados:
+P(Z < -1) = 0.1587
+P(Z < 1) = 0.8413
+
+Portanto, a probabilidade desejada é:
+P(90 < X < 110) = P(-1 < Z < 1) = P(Z < 1) - P(Z < -1) = 0.8413 - 0.1587 = 0.6826
+
+===============================================================================================
+
+(B) Para calcular a probabilidade considerando a média da amostra, precisamos considerar a 
+distribuição da média amostral. Para uma amostra grande (n ≥ 30) retirada de uma população 
+com distribuição normal, a média amostral segue uma distribuição normal com média igual à 
+média da população (μ) e desvio padrão igual ao desvio padrão da população (σ) dividido pela
+raiz quadrada do tamanho da amostra (sqrt(n)).
+
+Nesse caso, temos:
+μ = 100
+σ = 10
+n = 16
+
+A média amostral (X-) terá a mesma média da população, mas o desvio padrão será dado por
+σ / sqrt(n):
+
+σ' = σ / sqrt(n) = 10 / sqrt(16) = 10 / 4 = 2.5
+
+Vamos padronizar novamente a variável X- para uma distribuição normal padrão Z usando a fórmula
+Z = (X - μ) / σ':
+
+Z1 = (90 - 100) / 2.5 = -4
+Z2 = (110 - 100) / 2.5 = 4
+
+Consultando a tabela Z, encontramos as probabilidades correspondentes aos valores padronizados:
+P(Z < -4) ≈ 0 (muito próximo de zero)
+P(Z < 4) = 1
+
+Portanto, a probabilidade desejada é:
+P(90 < X < 110) ≈ P(-4 < Z < 4) = P(Z < 4) - P(Z < -4) ≈ 1 - 0 = 1
+
+================================================================================================
+

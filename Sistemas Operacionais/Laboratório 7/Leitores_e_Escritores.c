@@ -22,7 +22,7 @@ void up(semaphore* sem)
 
 void reader()
 {
-    while (1) 
+    while(1) 
     {
         down(&mutex); /* obtem acesso exclusivo a ‘rc’ */
         rc++; /* um leitor a mais agora */
@@ -34,7 +34,7 @@ void reader()
         down(&mutex); /* obtem acesso exclusivo a ‘rc’ */
         rc--; /* um leitor a menos agora */
         
-        if (rc == 0) up(&db); /* se este for o ultimo leitor ... */
+        if(rc == 0) up(&db); /* se este for o ultimo leitor ... */
 
         up(&mutex); /* libera o acesso exclusivo a ‘rc’ */
         use_data_read( ); /* regiao nao critica */
