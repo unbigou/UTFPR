@@ -3,21 +3,27 @@
 #include <stdio.h>
 #include <random>
 
-sem_t sala, qtt_monitores;
+const int QTT_ALUNOS = 11;
+const int QTT_MONITORES = 3;
+const int TAM_DOS_GRUPOS = 3;
+
+sem_t em_sala;
+sem_t sala_vazia;
 
 
-void* Alunos_de_SO(void*)
+void* Alunos_de_SO(void* id)
 {
-    sem_wait(&sala);
+    int id_aluno = *(int*) id;
+    
+    sem_wait(&em_sala);
 
     
     pthread_exit(NULL);
 }
 
-void* Estudantes_Monitores(void*)
+void* Estudantes_Monitores(void* id)
 {
-    sem_wait(&sala);
-    sem_init(&qtt_monitores, 0, 0);
+    sem_wait(&em_sala);
 
 
     pthread_exit(NULL);
@@ -26,21 +32,12 @@ void* Estudantes_Monitores(void*)
 
 void* Professor_Campiolo(void*)
 {
-    sem_init(&sala, 0, 0);
+    sem_init(&em_sala, 0, 1);
+    sem_init(&sala_vazia, 0, 0);
     printf("[Professor Campiolo abriu a sala]\n");
 
-    sem_post(&sala);
-    printf("[Professor Campiolo avisou os alunos]\n");
-    printf("[Professor Campiolo avisou os monitores]\n");
-
-    sem_wait(&sala);
-    int quantity = 1;
-    while(quantity)
-    {
-        sem_getvalue(&sala, &quantity);
-    }
-
-    sem_destroy(&sala);
+    sem_wait(&sala_vazia);  
+    sem_destroy(&em_sala);
     printf("[Professor Campiolo fechou a sala]");
 
     pthread_exit(NULL);
@@ -51,9 +48,17 @@ int main(void)
 {
     pthread_t alunos, monitores, professor;
 
-    pthread_create(&alunos, NULL, Alunos_de_SO, NULL);
-    pthread_create(&monitores, NULL, Estudantes_Monitores, NULL);
     pthread_create(&professor, NULL, Professor_Campiolo, NULL);    
+
+    for(int i = 0; i < QTT_MONITORES; i++)
+    {
+        pthread_create(&monitores, NULL, Estudantes_Monitores, &i);
+    }
+
+    for(int j = 0; j < QTT_ALUNOS; j++)
+    {
+        pthread_create(&alunos, NULL, Alunos_de_SO, &j);
+    }
 
     return 0;
 }
