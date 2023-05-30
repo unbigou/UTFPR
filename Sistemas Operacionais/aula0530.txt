@@ -1,0 +1,15 @@
+(1) Considere um sistema com gerência de memória que faz uso de TLB. Neste sistema, o tempo de acesso
+à TLB é de 10 ns e de acesso à memória é 80 ns. Considerando uma taxa de 90% de acerto na TLB, qual o 
+tempo médio de acesso à memória?
+
+    Tmédio  = ?
+            = h * (tatlb + tamem) + (1-h) * (tatlb + 2 * tamem)
+            = 0,9 * (10 + 80) + 0,1 * (10 + 2 * 80)
+            = 90 ns
+
+-----------------------------------------------------------------------------------------------------
+
+    Paginação simples não é a unica maneira de manter uma tabela de paginas, existe a table de páginas.
+Porém eu não tenho mais uma tabela por pagina, e sim uma unica tabela com uma unidade para cada quadro.
+Por causa disso o endereço lógico será diferente: PID, página e deslocamento. Então, toda vez que quiser
+acessa um dado, ao consultar a tabela de páginas ela devolvera o indice (frame) do dado.

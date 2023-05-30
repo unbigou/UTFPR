@@ -8,14 +8,15 @@
 
 using namespace std;
 
-const int QTT_ALUNOS = 11;
-const int QTT_MONITORES = 3;
-const int TAM_DOS_GRUPOS = 3;
+const int QTT_ALUNOS = 3;
+const int QTT_MONITORES = 1;
+const int TAM_DOS_GRUPOS = 2;
 
 sem_t sala_vazia;
 sem_t alunos_em_sala;
 sem_t monitores_em_sala;
 
+sem_t condicao_1;
 
 void* Alunos_de_SO(void* id)
 {
@@ -26,41 +27,31 @@ void* Alunos_de_SO(void* id)
 
     while(1)
     {
-        // Aluno tenta entrar na sala
+        sem_wait(&condicao_1);
+
         sem_getvalue(&monitores_em_sala, &aux_mtr);
         sem_getvalue(&alunos_em_sala, &aux_aln);
         
-        if(aux_mtr * TAM_DOS_GRUPOS > aux_aln) // <- Condição (1)
+        printf("<< alunos %d, monitores %d, tamanho %d>>\n", aux_aln, aux_mtr, TAM_DOS_GRUPOS);
+        if(aux_aln / TAM_DOS_GRUPOS < aux_mtr)
         {
             sem_post(&alunos_em_sala);
-            printf("Aluno %d entrou na sala\n", id_aluno);
-            
+
+            printf("[Aluno %d entrou na sala]\n", id_aluno);
             while(1)
             {
-                // Aluno estudando...
-                printf("[Aluno %d está estudando]\n", id_aluno);
-                sleep(rand() % 5);
+                printf("[Aluno %d está estudando]\n", id_aluno); sleep(3);
 
-                if(rand() % 3 == 1) // Tenta sair aleatóriamente
+                if(rand() % 5 == 1)
                 {   
                     printf("[Aluno %d saiu da sala]\n", id_aluno);
+                    sem_wait(&alunos_em_sala);
                     break;
                 }
             }
-            break; // <- Assim que o aluno sair uma vez da sala ele não tenta entrar de novo
-        }
-        else // Espera até poder tentar de novo
-        {
-            sleep(rand() % 5);
+            break;
         }
     }
-
-    sem_getvalue(&alunos_em_sala, &aux_aln);
-    if(aux_aln == 0)
-    {
-        sem_post(&sala_vazia);
-    }
-
     pthread_exit(NULL);
 }
 
@@ -76,23 +67,25 @@ void* Estudantes_Monitores(void* id)
     sem_post(&monitores_em_sala);
     printf("[Monitor %d entrou na sala]\n", id_monitor);
 
-    sem_wait(&alunos_em_sala);
-    
+    sem_wait(&alunos_em_sala);    
     while(1)
     {
         // Monitor supervisionando alunos...
-        printf("[Monitor %d está supervisionando os alunos]\n", id_monitor);
-        sleep(3);
+        printf("[Monitor %d está supervisionando os alunos]\n", id_monitor); sleep(3);
+        sem_getvalue(&monitores_em_sala, &aux_mtr);
+        sem_getvalue(&alunos_em_sala, &aux_aln);
+        if(aux_aln / TAM_DOS_GRUPOS < aux_mtr) sem_post(&condicao_1);
 
-        if(rand() % 4 == 1)
+        if(rand() % 4 == 1 || aux_aln == 0)
         {
             sem_getvalue(&monitores_em_sala, &aux_mtr);
             sem_getvalue(&alunos_em_sala, &aux_aln);
-        
-            if(aux_mtr * TAM_DOS_GRUPOS > aux_aln) // <- Condição (1)
+
+            if(aux_aln / TAM_DOS_GRUPOS < aux_mtr) // <- Condição (1)
             {
-                printf("[Monitor %d saiu da sala]\n", id_monitor);
+                printf("<< alunos %d, monitores %d >>\n", aux_aln, aux_mtr);
                 sem_wait(&monitores_em_sala);
+                printf("[Monitor %d saiu da sala]\n", id_monitor);
                 break;
             }
             else
@@ -101,6 +94,13 @@ void* Estudantes_Monitores(void* id)
             }
         }
     }
+    // Testar se o professor já pode fechar a sala
+    sem_getvalue(&monitores_em_sala, &aux_mtr);
+    if(aux_mtr == 0)
+    {
+        sem_post(&sala_vazia);
+    }
+
     pthread_exit(NULL);
 }
 
@@ -111,9 +111,8 @@ void* Professor_Campiolo(void*)
     sem_init(&sala_vazia, 0, 0);
     printf("[Professor Campiolo abriu a sala]\n");
 
-    // Avisar alunos
-
-    // Avisar monitores
+    // Avisar alunos...
+    // Avisar monitores...
 
     // Fechar sala
     sem_wait(&sala_vazia);  
@@ -128,8 +127,9 @@ int main(void)
 {
     pthread_t alunos, monitores, professor;
 
-    sem_init(&alunos_em_sala, 0, 0);
+    sem_init(&alunos_em_sala, 0, 1);
     sem_init(&monitores_em_sala, 0, 0);
+    sem_init(&condicao_1, 0, 0);
 
     pthread_create(&professor, NULL, Professor_Campiolo, NULL);    
 
