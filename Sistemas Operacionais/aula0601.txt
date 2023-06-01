@@ -1,0 +1,71 @@
+Memória Virtual
+Subistituição de página --- Bits auxiliares, facilitam e otimizam a implementação do mecanismo de
+subistituição de páginas.
+
+    Bit de referência (reference bit): indica se a página foi acessada em um intervalo de tempo.
+    Bit de sujeira ou modificação (dirty bit): indica se a página foi modificada durante a execução.
+    Bit de trava (lock bit): indica que uma página não pode ser vítima.
+
+Algoritmos
+NRU (Not Recenly Used)
+    Substitui as páginas não usadas recentemente.
+    Utiliza os bits R e M para selecionar as páginas vítimas.
+
+    Faz uso de 4 classes:
+    - 0: não referenciada, não modificada.
+    - 1: não referenciada, modificada.
+    - 2: referenciada, não modificida.
+    - 3: referenciada, modificada.
+    Substitui página aleatória de classe mais baixa.
+    Vantagens:
+    - Fácil de compreender
+    - Moderadamente eficiente de implementar
+    - Proporciona um desempenho satisfatório
+
+FIFO (First In, First Out)
+    Substitui a página mais antiga (primeira na fila).
+    Problema: a página mais antiga pode ainda estar sendo usada.
+    Raramente é usado esse algoritmo.
+
+#### Falta de pagina é quando uma página precisa ser colocada em um frame
+#### Nem sempre aumentar a memória significa diminuir a falta de páginas, Anomalia de Belady
+-> Questão sobre falta de páginas na prova <-
+
+Segunda Chance
+    FIFO + bit R
+    Substitui a página mais velha não referenciada.
+    implementação como uma lista encadeada de páginas na memória:
+        Se R == 0, então remove a página;
+        Senão, R <- 0, então coloca no final da lista.
+
+Relógio
+    Otimização do Segunda Chance
+    Implementado como uma lista circular de páginas na memória.
+    Ponteiro aponta para a página mais antiga.
+    Se R == 0, troca de página e desloca ponteiro;
+    Senão R <- 0, avança o ponteiro.
+
+LRU (Least Recently Used)
+    Substitui as páginas menos usadas recentemente.
+    Implementação como uma lista de páginas ordenadas pelo uso recente.
+    Problema: Custo para atualizar a lista a cada acesso à memória.
+    Solução: Hardware especial, por exemplo, contador C que é incrementado e armazenado para cada entrada.
+Percorrer a tabela de páginas ativas e localizar o menor valor de C. (ou seja, devolve a pagina que foi
+menos usada recentemente.)
+
+Aging
+    [...]
+
+Algoritmo do Conjunto de Trabalho
+    Conjunto de trabalho é o conjunto de páginas que um processo está usando.
+    Thrashing é quando ocorre a todo instante falta de páginas.
+    Tentar manter o conjunto de trabalho para não causar tanta faltas de páginas.
+    O algoritmo deve procurar remover páginas que não estão no conjunto de trabalho.
+
+WSClock
+    Combinação do algoritmo do Conjunto de Trabalho e Relógio.
+    Simples de implementar e bom desempenho.
+    Se R == 1: R <- 0 e avança;
+    [...]
+
+

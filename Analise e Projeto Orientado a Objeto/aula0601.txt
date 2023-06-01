@@ -1,0 +1,5 @@
+No diagrama de casos de uso o * significaque o ator pode ter varios e tera um valor constante caso o 
+ator só tenha um valor limitado (geralmente 1).
+
+Quando ambos atores tem * (requerem varios um do outro), significa que ainda há algo a ser abstraido
+para excluir essa concorência.
