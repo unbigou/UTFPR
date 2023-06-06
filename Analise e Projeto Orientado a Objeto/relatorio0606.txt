@@ -1,0 +1,79 @@
+--- SOLID, GRASP e outros principios da Orientação a Objeto. ---
+
+    Principio de responsabilidade unica: é o metodo de ter apenas uma responsabilidade,
+assim, quando precisa ser feito a alteração de algum componente basta alterar O
+responsável pela ação.
+    Tal como feito na abstração da calculadora, onde cada parte dela tinha sua própria 
+função com o minimo de dependências entre outros componentes.
+
+    Principio da indireção, esse principio explica de como objetos podem interagir com outros
+colocando um objeto próprio para realizar a comunicação entre os objetos. Assim reduzindo O
+aclopamento de objetos, facilitando a correção de erros entre objetos. 
+    Como feito no Teclado da calculadora, que era o intermediário entre o usuário e a CPU.
+
+    Coesão, uma extensão do principio de responsabilidade, o ideal é um projeto com alto 
+nivel de coesão. O diferencial é, não necessáriamente atribuir apenas uma responsabilidade
+a um objeto, mais responsabilidades podem ser dadas a esse objeto contanto que façam sentidos
+a sua responsabilidade principal.
+
+    Herança, um código feito de forma ampla o suficiente para que possa ser reutilizado por
+outra parte do código, isso é herança. 
+    Na calculadora essa caracteristica foi utilizada na composição do Display para aqueles
+que desenvolveram-na utilizando o Console.
+
+    Baixo aclopamento, o objeto é diminuir as dependências entre classes. Caso precisemos que
+duas ou mais classes se comuniquem, criamos então uma interface responsável pela comunicação.
+Fazendo com que os objetos que se comuniquem saibam o minimo possivel do outro.
+    Os metodos receiveDigit e etc, eram essas interfaces que realizavam a comunicação entre
+teclado e CPU.
+
+    Controlador, ajuda a minimizar as dependencias entre componentes GUI e classes de modelo de
+dominio.
+Controller tem dois propositos:
+    1 --- Encapsular operações de sistemas, fazendo com que haja chamada de um ou mais 
+metodos entre o sistema e os objetos do software.
+    2 --- Providênciar uma camada entre UI (Interface de Usuário) e o dominio.
+O controlador então é o responsavél por lidar com a chamada por uma operação do sistema. 
+Assim atingindo uma flexibilidade maior, permitindo a futura agregação de outras camadas ao 
+sistema.
+
+    Aberto e fechado, tem o objetivo de trabalhar com a manutenção de pastas. Esse principio
+diz que nossas pastas devem ser abertos através de um determinado formato. 
+    Um exemplo não explicito na calculadora, seriam os metodos virtuais. Que serviam como
+a base para o desenvolvimento dos dados.
+    "Aberto para ser extendido e fechado para ser mudado", palavras do professor.
+
+    Fabricação Pure, é a ideia de criar objetos com sua função mais pura. Isso facilita tanto
+o compreendimento do sistema quanto seu próprio desenvolvimento, já que cada desenvolvedor
+saberá o proposito de cada objeto.
+
+    Subistituição de Liskov, uma classe derivada não pode ter mais entrada que a classe herdada, 
+toda classe derivada deve ser possivelmente substituida pela classe base sem maiores problemas. 
+
+    Creator, uma classe deve ter responsabilidade de instanciar objetos dentro de outra de forma 
+a permitir um desenvolvimento mais complexo da aplicação. Resumidamente, um classe responsável
+pelas instanciações de outros componentes dentro de um objeto.
+
+    Segregação de classes, esse principio diz que um cliente não deve ter a responsabilidade de
+instanciar interfaces que não irá utilizar. Para que ele seja atingindo é necessário que cada
+objeto seja capaz de operar por si só caso algum de seus componentes não seja inicializado.
+    
+    Information Expert, é um formato de projeto que exige que todo determinado metodo deve ser
+feito apenas por objetos que tenham conhecimento do que estão fazendo.
+
+    Inversão de dependencias, o modelo de alto nivel não depende do modelo de baixo nivel. Não 
+importa se há implementação de um nivel, o programa deve ser capaz de operar independente.
+    Tal como na CPU que era capaz de mostrar um digito idependente da abstração de Display.
+
+    Polimorfismo, esse principio é dado quando temos uma classe mãe aonde todos os objetos daquele
+sistema herdarão seus métodos e caracteristicas. Essa super-classe evita a repetição de códigos.
+
+    Interface, o objetivo desse principio é desfocar do hard-code e focar na interligação de cada objeto
+e pensar nele como uma estrutura. Como citado pelos outros principios, cada objeto terá seu próprio
+espaço e responsabilidade no sistema.
+
+    Hollywood, esse conceito diz que em momentos nenhum os conceitos de baixo nivel devem chamar os
+conceitos de alto nivel. Isso evita o que é chamado de desenvolvimento enraizado, pois terá essa
+"raiz" entre os niveis, dificultando a implementação.
+    O exemplo que temos na calculadora é a intereção entre teclado e tecla, onde o teclado que
+chama a tecla e nunca o contrario, vale ressaltar que somente o teclado chama a tecla na calculadora.
