@@ -1,0 +1,8 @@
+Sistemas de Armazenamento
+---------------------------
+* Abstração do Sistema Operacional para armazenar e acessar dados em um meio não volátil (persistente).
+* Unidades lógicas de informação criadas por processos.
+* Proveem uma forma simples, coerente e fácil de usar para acessar informações em uma mídia de Armazenamento
+persistente.
+
+Atributos: Nome, tipo, tamanho, datas, proprietário, permissões de acesso, localização...

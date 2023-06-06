@@ -1,0 +1,12 @@
+------ Controller (GRASP) -----
+Os principios de design de Controller ajudam a minimizar as dependencias entre componentes
+GUI e classes de modelo de dominio.
+-----
+Controller tem dois propositos:
+    1 --- Encapsular operações de sistemas, fazendo com que haja chamada de um ou mais 
+metodos entre o sistema e os objetos do software.
+    2 --- Providênciar uma camada entre UI (Interface de Usuário) e o dominio.
+-----
+O controlador então é o responsavél por lidar com a chamada por uma operação do sistema. 
+Assim atingindo uma flexibilidade maior, permitindo a futura agregação de outras camadas ao 
+sistema.
